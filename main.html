@@ -1,0 +1,878 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Lakshiya Portfolio</title>
+
+  <!-- Font & Icons -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600&display=swap" rel="stylesheet">
+  
+  <!-- Styles -->
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Open Sans', Arial, sans-serif;
+      background: #101522;
+      min-height: 100vh;
+      overflow-x: hidden;
+      position: relative;
+      display: flex;
+    }
+    .sidebar {
+      position: fixed;
+      width: 340px;
+      height: 100vh;
+      background: #181a20;
+      color: #fff;
+      padding: 30px 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      left: 0;
+      top: 0;
+      z-index: 10;
+    }
+    .main-content {
+      margin-left: 300px;
+      min-height: 100vh;
+      background: transparent;
+      padding: 0 0 40px 0;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .section-container {
+      background: #181d2f;
+      color: #fff;
+      padding: 40px 40px 30px 40px;
+      border-radius: 18px;
+      margin: 40px 0 0 0;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+      max-width: 900px;
+      width: 100%;
+      box-sizing: border-box;
+      position: static;
+    }
+    .section-container h1 {
+      font-size: 2.5em;
+      margin-bottom: 18px;
+      border-bottom: 3px solid #2196f3;
+      display: inline-block;
+      padding-bottom: 6px;
+    }
+    /* Hero Section */
+    .hero {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+    }
+    .hero-bg-video {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: 0;
+      opacity: 0.45;
+    }
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+    .hero-content h1,
+    .hero-content p {
+      color: #fff;
+      text-align: center;
+      margin: 0;
+    }
+    .cursor {
+      display: inline-block;
+      width: 1ch;
+      color: #fff;
+      animation: blink 0.7s steps(1) infinite;
+      font-weight: bold;
+      font-size: 1em;
+      position: relative;
+      left: 2px;
+    }
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
+    }
+    /* Social Icons */
+    .social-icons {
+      display: flex;
+      gap: 22px;
+      margin-bottom: 35px;
+    }
+    .social-icons a {
+      color: #fff;
+      background: #232946;
+      border-radius: 50%;
+      width: 48px;
+      height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5em;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+    .social-icons a:hover {
+      background: #444;
+    }
+    .profile-img img {
+      width: 130px;
+      height: 130px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 5px solid #232946;
+    }
+    .profile-name {
+      margin: 20px 0 15px 0;
+      font-size: 2.1em;
+      font-weight: 700;
+      text-align: center;
+    }
+    .nav-menu ul {
+      list-style: none;
+      padding: 0;
+      width: 100%;
+    }
+    .nav-menu ul li {
+      padding: 15px 40px;
+      font-size: 1.1em;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .nav-menu ul li:hover,
+    .nav-menu ul li.active {
+      background: #232946;
+    }
+    /* Skills Bars */
+    .skills-bars {
+      display: flex;
+      flex-direction: column;
+      gap: 22px;
+    }
+    .skill-bar {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+    }
+    .skill-title {
+      width: 110px;
+      font-weight: 600;
+      font-size: 1.1em;
+      color: #fff;
+    }
+    .bar-bg {
+      flex: 1;
+      background: #232946;
+      border-radius: 20px;
+      height: 28px;
+      overflow: hidden;
+      position: relative;
+    }
+    .bar-fill {
+      background: linear-gradient(90deg, #2196f3 60%, #21cbf3 100%);
+      height: 100%;
+      border-radius: 20px;
+      color: #fff;
+      font-weight: bold;
+      font-size: 1em;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      padding-right: 18px;
+      transition: width 1s;
+      box-shadow: 0 2px 10px rgba(33,150,243,0.15);
+    }
+    /* Resume Section */
+    .resume-flex {
+      display: flex;
+      gap: 40px;
+      flex-wrap: wrap;
+      margin-top: 30px;
+    }
+    .resume-col {
+      flex: 1;
+      min-width: 300px;
+    }
+    .resume-section h2 {
+      font-size: 1.4em;
+      margin-top: 30px;
+      margin-bottom: 12px;
+      color: #21cbf3;
+      letter-spacing: 0.5px;
+    }
+    .resume-item {
+      margin-bottom: 24px;
+    }
+    .resume-item h3 {
+      font-size: 1.15em;
+      margin-bottom: 4px;
+      color: #fff;
+    }
+    .resume-date {
+      display: block;
+      font-size: 0.98em;
+      color: #90caf9;
+      margin-bottom: 4px;
+    }
+    .resume-item em {
+      color: #b0bec5;
+      font-style: italic;
+    }
+    .resume-item ul,
+    .resume-list {
+      margin: 8px 0 0 18px;
+      padding: 0;
+      color: #fff;
+      font-size: 1em;
+    }
+    .resume-item ul li,
+    .resume-list li {
+      margin-bottom: 6px;
+      line-height: 1.5;
+    }
+    /* Projects Section */
+    .projects-row {
+      display: flex;
+      gap: 32px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .project-card {
+  width: 260px;            /* Slightly wider card for bigger image */
+  height: 340px;           /* Slightly taller card */
+}
+    .card-inner {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      transition: transform 0.7s cubic-bezier(.4,0,.2,1);
+      transform-style: preserve-3d;
+    }
+    .project-card.flipped .card-inner {
+      transform: rotateY(180deg);
+    }
+    .card-front, .card-back {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      backface-visibility: hidden;
+      border-radius: 18px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    .card-front {
+      background: #232946;
+      color: #fff;
+      z-index: 2;
+    }
+    .card-front img {
+  width: 100%;
+  height: 200px;           /* Increased height for better visibility */
+  object-fit:fill;       /* Ensures the image covers the area without distortion */
+  border-radius: 18px 18px 0 0;
+  box-shadow: 0 4px 16px rgba(33,150,243,0.18); /* Optional: subtle shadow for pop */
+  background: #232946;     /* Fallback background */
+}
+    .card-front h2 {
+      margin: 18px 0 0 0;
+      font-size: 1.3em;
+      font-weight: 700;
+      text-align: center;
+    }
+    .card-back {
+      background: #2196f3;
+      color: #fff;
+      transform: rotateY(180deg);
+      padding: 24px 18px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .card-back h3 {
+      margin-bottom: 10px;
+      font-size: 1.2em;
+    }
+    .card-back p {
+      font-size: 1em;
+      margin-bottom: 18px;
+    }
+    .card-back a {
+      color: #fff;
+      background: #181d2f;
+      padding: 8px 18px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: background 0.2s;
+    }
+    .card-back a:hover {
+      background: #101522;
+    }
+    /* Pop-in Animation */
+    .pop-line {
+      opacity: 0;
+      transform: translateY(30px);
+      animation: popLine 0.7s cubic-bezier(.4,0,.2,1) forwards;
+      animation-delay: var(--delay, 0s);
+    }
+    @keyframes popLine {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    @media (max-width: 1100px) {
+      .sidebar {
+        position: static;
+        width: 100%;
+        height: auto;
+      }
+      .main-content {
+        margin-left: 0;
+        max-width: 100vw;
+      }
+      .section-container {
+        max-width: 100vw;
+        border-radius: 0;
+        margin: 20px 0 0 0;
+        padding: 20px 10px;
+      }
+      .projects-row {
+        flex-direction: column;
+        align-items: center;
+        gap: 24px;
+      }
+    }
+    .visible {
+  opacity: 1 !important;
+  transform: translateY(0) !important;
+  transition: opacity 0.7s cubic-bezier(.4,0,.2,1), transform 0.7s cubic-bezier(.4,0,.2,1);
+}.project-card.wide-card {
+  width: 370px;
+  height: 340px;
+}
+/* Add to your styles.css for pop-in effect */
+.skill-bar,
+.resume-col,
+.project-card {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.7s cubic-bezier(.4,0,.2,1), transform 0.7s cubic-bezier(.4,0,.2,1);
+}
+.skill-bar.visible,
+.resume-col.visible,
+.project-card.visible {
+  opacity: 1 !important;
+  transform: translateY(0) !important;
+}
+.pop-point {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.7s cubic-bezier(.4,0,.2,1), transform 0.7s cubic-bezier(.4,0,.2,1);
+}
+.pop-point.visible {
+  opacity: 1 !important;
+  transform: translateY(0) !important;
+}
+  </style>
+</head>
+<body>
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <div class="profile-img">
+      <img src="/bg.jpg" alt="" class="img-fluid rounded-circle">
+    </div>
+    <div class="profile-name">
+      Lakshiya D
+    </div>
+    <div class="social-icons">
+      <a href="https://github.com/LakshiyaDhanapalan" target="_blank"><i class="fab fa-github"></i></a>
+      <a href="https://www.instagram.com/lakshiya_dhanapalan_" target="_blank"><i class="fab fa-instagram"></i></a>
+      <a href="https://www.linkedin.com/in/lakshiya-dhanapalan-4007382b7" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+      <a href="mailto:lakshiya.dhanapalan@gmail.com" target="_blank"><i class="fas fa-envelope"></i></a>
+      <a href="https://leetcode.com/u/Lakshiya_D/" target="_blank" title="LeetCode Profile" style="margin-left: 6px;">
+    <i class="fa-solid fa-code"></i>
+  </a>
+    </div>
+    <nav class="nav-menu">
+      <ul>
+        <li class="nav-link" data-target="hero"><i class="fas fa-home"></i> Home</li>
+        <li class="nav-link" data-target="about"><i class="fas fa-user"></i> About</li>
+        <li class="nav-link" data-target="skills"><i class="fas fa-cogs"></i> Skills</li>
+        <li class="nav-link" data-target="resume"><i class="fas fa-file-alt"></i> Resume</li>
+         <li class="nav-link" data-target="projects"><i class="fas fa-briefcase"></i> Projects</li>
+        <li class="nav-link" data-target="contact">
+          <a href="mailto:lakshiya.dhanapalan@gmail.com" style="display:flex;align-items:center;gap:15px;color:inherit;text-decoration:none;"><i class="fas fa-envelope-open-text"></i> Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+
+  <!-- Main Content -->
+  <div class="main-content">
+    <!-- Hero Section -->
+    <section id="hero" class="hero">
+      <video class="hero-bg-video" autoplay muted loop playsinline>
+        <source src="/23326-334689164_medium.mp4" type="video/mp4">
+       
+      </video>
+      <div class="hero-content">
+        <h1 class="pop-line" style="--delay:0s;">Lakshiya D</h1>
+        <p class="pop-line" style="--delay:0.7s;">
+          <span id="typed-text"></span>
+          <span class="cursor">|</span>
+        </p>
+      </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="section-container section-pop">
+      <h1 class="pop-line" style="--delay:0s;">About</h1>
+      <div class="about-content">
+        <p class="pop-line" style="--delay:0.3s;">
+          A highly skilled Computer Science Engineering student proficient in C, Python, HTML, and CSS. Expert in problem-solving, algorithmic thinking, and building dynamic websites with WordPress. Adept at creating efficient, scalable code and designing seamless, responsive web interfaces. Constantly evolving with the latest technologies to deliver innovative, high-performance solutions.
+        </p>
+        <ul>
+          <li class="pop-point" style="--delay:0.6s;"><strong>Current Role:</strong> CSE student with a strong foundation in programming and software development.</li>
+          <li class="pop-point" style="--delay:0.9s;"><strong>Passion:</strong> Dedicated to building innovative solutions and improving user experiences through technology.</li>
+          <li class="pop-point" style="--delay:1.2s;"><strong>Web Development:</strong> Skilled in designing responsive websites using WordPress and front-end technologies.</li>
+          <li class="pop-point" style="--delay:1.5s;"><strong>Creative Mind:</strong> Blending logic and creativity to develop seamless, user-centric solutions.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="section-container section-pop">
+      <h1 class="pop-line" style="--delay:0s;">Skills</h1>
+      <p class="pop-line" style="--delay:0.3s;">
+        Proficient in multiple programming languages and web technologies, with a focus on clean, efficient, and scalable code.
+      </p>
+      <div class="skills-bars">
+        <div class="skill-bar pop-line" style="--delay:0.6s;">
+          <span class="skill-title">C</span>
+          <div class="bar-bg">
+            <div class="bar-fill" style="width: 90%;">90%</div>
+          </div>
+        </div>
+        <div class="skill-bar pop-line" style="--delay:0.8s;">
+          <span class="skill-title">Java</span>
+          <div class="bar-bg">
+            <div class="bar-fill" style="width: 85%;">95%</div>
+          </div>
+        </div>
+        <div class="skill-bar pop-line" style="--delay:1.0s;">
+          <span class="skill-title">Python</span>
+          <div class="bar-bg">
+            <div class="bar-fill" style="width: 92%;">82%</div>
+          </div>
+        </div>
+        <div class="skill-bar pop-line" style="--delay:1.2s;">
+          <span class="skill-title">HTML</span>
+          <div class="bar-bg">
+            <div class="bar-fill" style="width: 98%;">98%</div>
+          </div>
+        </div>
+        <div class="skill-bar pop-line" style="--delay:1.4s;">
+          <span class="skill-title">CSS</span>
+          <div class="bar-bg">
+            <div class="bar-fill" style="width: 95%;">85%</div>
+          </div>
+        </div>
+        <div class="skill-bar pop-line" style="--delay:1.6s;">
+          <span class="skill-title">JavaScript</span>
+          <div class="bar-bg">
+            <div class="bar-fill" style="width: 80%;">70%</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Resume Section -->
+    <section id="resume" class="section-container section-pop">
+      <h1>Resume</h1>
+      <p>
+        A passionate Computer Science Engineering student with strong programming, web development, and problem-solving skills. Dedicated to continuous learning and delivering innovative solutions.
+      </p>
+      <div class="resume-flex">
+        <!-- Left Column -->
+       <div class="resume-col">
+  <!-- Stamp-size profile image instead of "Summary" heading -->
+  <div class="resume-stamp-img" style="display: flex; align-items: center; margin-bottom: 18px;">
+    <img src="/bg.jpg" alt="Profile" style="width:38px; height:38px; border-radius:50%; object-fit:cover; border:2px solid #2196f3; box-shadow:0 2px 8px rgba(33,150,243,0.10);">
+    <span style="margin-left: 12px; font-weight:600; color:#fff;">Lakshiya D</span>
+  </div>
+          <div class="resume-item">
+            
+            <p>
+              <em>Motivated and deadline-driven CSE student with experience in developing user-centered web applications and solving algorithmic challenges. Strong foundation in C, Java, Python, HTML, CSS, and JavaScript.</em>
+            </p>
+            <ul>
+              <li>Hosur, India</li>
+              <li>lakshiyadhanapalan19@gmail.com</li>
+            </ul>
+          </div>
+          <h2>Education</h2>
+          <div class="resume-item">
+            <h3>Bachelor of Engineering in Computer Science</h3>
+            <span class="resume-date">2023 -2027</span>
+            <p><em>Dr.Mahalingam college of Engineering and technology, Pollachi
+            </em></p>
+            <p>
+              Coursework: Data Structures, Algorithms, Web Technologies, Database Management, Operating Systems.
+            </p>
+          </div>
+          <div class="resume-item">
+            <h3>Higher Secondary School</h3>
+            <span class="resume-date">2020 - 2022</span>
+            <p><em>Green Valley Matriculation School, Hosur</em></p>
+            <p>
+              Major: Computer Science, Mathematics, Physics, Chemistry.
+              Percentage: 93.7%
+            </p>
+          </div>
+          <h2>Languages Known</h2>
+          <ul class="resume-list">
+            <li>English (Fluent)</li>
+            <li>Tamil (Native)</li>
+            <li>Telugu (Conversational)</li>
+          </ul>
+        </div>
+        <!-- Right Column -->
+        <div class="resume-col">
+          <h2>Professional Experience</h2>
+          <div class="resume-item">
+            <h3>Web  Application Developer Intern</h3>
+            <span class="resume-date">May 2024 - July 2024</span>
+            <p><em>Sorcee , Pollachi</em></p>
+            <ul>
+              <li>Developed responsive websites using HTML, CSS, JavaScript, and WordPress.</li>
+              <li>Contributed to real-time web application projects in a startup-driven, innovation-focused environment.</li>
+              <li>Gained hands-on experience in full-stack development processes within a team-based project setup</li>
+              <li>Improved skills in front-end and back-end technologies, version control, and deployment strategies</li>
+            </ul>
+          </div>
+          <h2>Soft Skills</h2>
+          <ul class="resume-list">
+            <li>Problem Solving</li>
+            <li>Teamwork & Collaboration</li>
+            <li>Communication</li>
+            <li>Adaptability</li>
+            <li>Time Management</li>
+            <li>Creativity</li>
+          </ul>
+           <h2>Certifications</h2>
+        <ul class="resume-list">
+          <li>
+            <strong>NPTEL - Product and Brand Management (Jul-OCT 2024):</strong><br>
+            Successfully completed with a score of 63%.
+          </li>
+          <li>
+            <strong>NPTEL - Usability Engineering(Jan-Apr 2025):</strong>
+           <span> Successfully completed with a score of 61%.</span>
+          </li>
+          <li>
+            <strong>Linguaskill (Business) - Cambridge University:</strong>
+            Achieved B1 and above.
+          </li>
+        </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="section-container section-pop">
+      <h1>Projects</h1>
+     <div class="projects-row">
+  <!-- Project Card 1 -->
+  <div class="project-card">
+    <div class="card-inner">
+      <div class="card-front">
+        <img src="/creati.jpg" alt="Creatifusions Project">
+        <h2>Creatifusions</h2>
+      </div>
+      <div class="card-back">
+        <h3>Creatifusions</h3>
+        <p>A creative platform for digital artists to showcase and collaborate on unique art projects. Features include galleries, artist profiles, and real-time collaboration tools.</p>
+        <a href="https://creatifusions.example.com" target="_blank">Visit Site</a>
+      </div>
+    </div>
+  </div>
+  <!-- Project Card 2 -->
+  <div class="project-card">
+    <div class="card-inner">
+      <div class="card-front">
+        <img src="/yebsys.jpg" alt="Yebsys Project">
+        <h2>Yebsys</h2>
+      </div>
+      <div class="card-back">
+        <h3>Yebsys</h3>
+        <p>An enterprise resource planning (ERP) solution for small businesses, offering modules for inventory, sales, HR, and analytics in a user-friendly dashboard.</p>
+        <a href="https://yebsys.example.com" target="_blank">Visit Site</a>
+      </div>
+    </div>
+  </div>
+  <!-- Project Card 3 -->
+  <div class="project-card wide-card">
+    <div class="card-inner">
+      <div class="card-front">
+        <img src="/wolfarm.jpg" alt="Wolfram Project">
+        <h2>Wolfram</h2>
+      </div>
+      <div class="card-back">
+        <h3>Wolfram</h3>
+        <p>A scientific computation platform integrating advanced algorithms, visualization, and data analysis for researchers and students.</p>
+        <a href="https://wolfram.example.com" target="_blank">Visit Site</a>
+      </div>
+    </div>
+  </div>
+</div>
+    </section>
+
+
+  <script>
+    // Sidebar navigation smooth scroll (no blue link style)
+    document.querySelectorAll('.nav-link').forEach(item => {
+      item.addEventListener('click', function () {
+        const targetId = this.getAttribute('data-target');
+        const targetSection = document.getElementById(targetId);
+        if (targetSection) {
+          window.scrollTo({
+            top: targetSection.offsetTop - 20,
+            behavior: 'smooth'
+          });
+        }
+      });
+    });
+
+    // Pop-in each line in hero/about/skills
+    document.addEventListener('DOMContentLoaded', function() {
+      document.querySelectorAll('.pop-line').forEach(el => {
+        el.style.animationPlayState = 'running';
+      });
+    });
+
+    // Typing animation for "I'm a Web Developer, CSE Student"
+    document.addEventListener('DOMContentLoaded', function(){
+      const textArray = ["I'm a Web Developer", "CSE Student"];
+      const typedText = document.getElementById('typed-text');
+      const cursor = document.querySelector('.cursor');
+      let textArrayIndex = 0;
+      let charIndex = 0;
+      let isDeleting = false;
+
+      function type() {
+        const currentText = textArray[textArrayIndex];
+        if (!isDeleting) {
+          typedText.textContent = currentText.substring(0, charIndex + 1);
+          charIndex++;
+          if (charIndex === currentText.length) {
+            isDeleting = true;
+            setTimeout(type, 1200);
+          } else {
+            setTimeout(type, 80);
+          }
+        } else {
+          typedText.textContent = currentText.substring(0, charIndex - 1);
+          charIndex--;
+          if (charIndex === 0) {
+            isDeleting = false;
+            textArrayIndex = (textArrayIndex + 1) % textArray.length;
+            setTimeout(type, 500);
+          } else {
+            setTimeout(type, 40);
+          }
+        }
+      }
+      type();
+    });
+
+    // Project card flip
+    document.addEventListener('DOMContentLoaded', function() {
+      document.querySelectorAll('.project-card').forEach(card => {
+        card.addEventListener('click', function () {
+          this.classList.toggle('flipped');
+        });
+        card.addEventListener('touchstart', function () {
+          this.classList.toggle('flipped');
+        });
+      });
+    });
+
+    // Pop-in on scroll for sections
+    function revealSectionsOnScroll() {
+      const sections = document.querySelectorAll('.section-pop');
+      const triggerBottom = window.innerHeight * 0.85;
+      sections.forEach(section => {
+        const sectionTop = section.getBoundingClientRect().top;
+        if (sectionTop < triggerBottom) {
+          section.classList.add('visible');
+        }
+      });
+    }
+    window.addEventListener('scroll', revealSectionsOnScroll);
+    window.addEventListener('DOMContentLoaded', revealSectionsOnScroll);
+    // Pop-in the first paragraph of each section when scrolling
+function popFirstParagraphOnScroll() {
+  document.querySelectorAll('.section-container').forEach(section => {
+    const firstPara = section.querySelector('p');
+    if (firstPara && !firstPara.classList.contains('visible')) {
+      const rect = firstPara.getBoundingClientRect();
+      if (rect.top < window.innerHeight * 0.85) {
+        firstPara.classList.add('visible');
+      }
+    }
+  });
+}
+
+window.addEventListener('scroll', popFirstParagraphOnScroll);
+window.addEventListener('DOMContentLoaded', popFirstParagraphOnScroll);
+// Pop-in each skill bar one by one on scroll
+function popSkillsOnScroll() {
+  const skillsSection = document.getElementById('skills');
+  if (!skillsSection) return;
+  const skillBars = skillsSection.querySelectorAll('.skill-bar');
+  const triggerBottom = window.innerHeight * 0.85;
+  skillBars.forEach((bar, idx) => {
+    const rect = bar.getBoundingClientRect();
+    if (rect.top < triggerBottom && !bar.classList.contains('visible')) {
+      setTimeout(() => {
+        bar.classList.add('visible');
+      }, idx * 180); // staggered delay
+    }
+  });
+}
+
+// Pop-in each resume column (left/right) on scroll
+function popResumeColsOnScroll() {
+  const resumeSection = document.getElementById('resume');
+  if (!resumeSection) return;
+  const cols = resumeSection.querySelectorAll('.resume-col');
+  const triggerBottom = window.innerHeight * 0.85;
+  cols.forEach((col, idx) => {
+    const rect = col.getBoundingClientRect();
+    if (rect.top < triggerBottom && !col.classList.contains('visible')) {
+      setTimeout(() => {
+        col.classList.add('visible');
+      }, idx * 250);
+    }
+  });
+}
+
+// Pop-in each project card one by one on scroll
+function popProjectsOnScroll() {
+  const projectsSection = document.querySelector('.projects-row');
+  if (!projectsSection) return;
+  const cards = projectsSection.querySelectorAll('.project-card');
+  const triggerBottom = window.innerHeight * 0.85;
+  cards.forEach((card, idx) => {
+    const rect = card.getBoundingClientRect();
+    if (rect.top < triggerBottom && !card.classList.contains('visible')) {
+      setTimeout(() => {
+        card.classList.add('visible');
+      }, idx * 200);
+    }
+  });
+}
+
+// Call all pop-in functions on scroll and DOMContentLoaded
+function popAllOnScroll() {
+  popFirstParagraphOnScroll();
+
+  popResumeColsOnScroll();
+  popProjectsOnScroll();
+}
+
+window.addEventListener('scroll', popAllOnScroll);
+window.addEventListener('DOMContentLoaded', popAllOnScroll);
+function typeSkillBarText(skillBar, percentText, delay = 0) {
+  const barFill = skillBar.querySelector('.bar-fill');
+  const percentStr = barFill.textContent.trim();
+  const percentNum = parseInt(percentStr, 10);
+  barFill.textContent = '0%';
+  barFill.style.width = '0%';
+  let i = 0;
+  function animatePercent() {
+    if (i <= percentNum) {
+      barFill.textContent = i + '%';
+      barFill.style.width = i + '%';
+      i++;
+      setTimeout(animatePercent, 12); // speed of counting
+    } else {
+      barFill.textContent = percentStr;
+      barFill.style.width = percentStr;
+    }
+  }
+  setTimeout(() => {
+    skillBar.classList.add('visible');
+    animatePercent();
+  }, delay);
+}
+
+function popSkillsTypewriter() {
+  const skillsSection = document.getElementById('skills');
+  if (!skillsSection) return;
+  const skillBars = skillsSection.querySelectorAll('.skill-bar');
+  const triggerBottom = window.innerHeight * 0.85;
+  let started = false;
+  if (skillBars.length && skillsSection.getBoundingClientRect().top < triggerBottom) {
+    if (skillsSection.dataset.animated) return; // Only animate once
+    skillsSection.dataset.animated = "true";
+    skillBars.forEach((bar, idx) => {
+      typeSkillBarText(bar, bar.querySelector('.bar-fill').textContent, idx * 350);
+    });
+  }
+}
+
+window.addEventListener('scroll', popSkillsTypewriter);
+window.addEventListener('DOMContentLoaded', popSkillsTypewriter);
+// Pop-in each about point one by one on scroll
+function popAboutPointsOnScroll() {
+  const aboutSection = document.getElementById('about');
+  if (!aboutSection) return;
+  const points = aboutSection.querySelectorAll('.pop-point');
+  const triggerBottom = window.innerHeight * 0.85;
+  let anyVisible = false;
+  points.forEach((point, idx) => {
+    const rect = point.getBoundingClientRect();
+    if (rect.top < triggerBottom && !point.classList.contains('visible')) {
+      setTimeout(() => {
+        point.classList.add('visible');
+      }, idx * 200);
+      anyVisible = true;
+    }
+  });
+}
+
+window.addEventListener('scroll', popAboutPointsOnScroll);
+window.addEventListener('DOMContentLoaded', popAboutPointsOnScroll);
+  </script>
+</body>
+</html>
